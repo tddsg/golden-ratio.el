@@ -62,6 +62,11 @@ will not cause the window to be resized to the golden ratio."
   :group 'golden-ratio
   :type 'boolean)
 
+(defcustom golden-ratio-balance t
+  "Balance all other windows."
+  :group 'golden-ratio
+  :type 'boolean)
+
 (defcustom golden-ratio-adjust-factor 1.0
   "Adjust the width sizing by some factor. 1 is no adjustment.
    For very wide screens/frames, ie. 3400px, .4 may work well."
@@ -152,7 +157,7 @@ will prevent the window to be resized to the golden ratio."
           (golden-ratio-mode nil))
       ;; Always disable `golden-ratio-mode' to avoid
       ;; infinite loop in `balance-windows'.
-      (balance-windows)
+      (when golden-ratio-balance (balance-windows))
       (golden-ratio--resize-window dims)
       (when golden-ratio-recenter
         (scroll-right) (recenter)))))
